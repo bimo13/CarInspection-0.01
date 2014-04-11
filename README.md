@@ -1,0 +1,1 @@
+This is Dummy App of Android "Car Inspection" application for Total IT.
