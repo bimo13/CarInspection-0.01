@@ -88,8 +88,7 @@ var app = {
 				
 			}//END if(result.cancelled === false)
 			
-		},//END scanner.scan(function(result)
-		function(error){
+		}, function(error){ //END scanner.scan(function(result)
 			$("#myDialogs").empty();
 			$("#myDialogs").html("<div class=\"text-danger\">Alert !</div>");
 			
