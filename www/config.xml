@@ -45,5 +45,7 @@
 			<gap:plugin name="org.apache.cordova.camera" version="0.2.4" />
 			<!-- File API Plugin. -->
 			<gap:plugin name="org.apache.cordova.file" version="1.0.1" />
+			<!-- Barcode Scanner Plugin. -->
+			<gap:plugin name="com.phonegap.plugins.barcodescanner" version="1.1.0" />
 			
 </widget>

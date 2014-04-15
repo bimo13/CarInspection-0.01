@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Car Inspection</title>
+        
+        <!-- Bootstrap core CSS -->
+    	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom styles for main-page.html -->
+    	<link href="includes/css/main.css" rel="stylesheet">
+        <link href="includes/css/form-page.css" rel="stylesheet">
+        <link href="includes/css/dialogs.css" rel="stylesheet">
+        
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    
+    <body>
+    	
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+        	
+            <p class="messages bg-primary">Data Polis</p>
+			
+            <form role="form">
+                <button type="button" class="btn btn-lg btn-success btn-block bt-icon" id="btn-scan-barcode">SCAN BARCODE <span class="glyphicon glyphicon-qrcode"></span></button>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nomor Polis</label>
+                    <input type="text" class="form-control" id="polis_no" name="polis_no" placeholder="Nomor Polis" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nama Pemegang Polis</label>
+                    <input type="text" class="form-control" id="polis_nama" name="polis_nama" placeholder="Nama Pemegang Polis" readonly />
+                </div>
+            </form>
+            
+            <p class="messages bg-primary">Data Kendaraan</p>
+            
+            <form role="form">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Merk Kendaraan</label>
+                    <input type="text" class="form-control" id="kend_merk" name="kend_merk" placeholder="Merk Kendaraan" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tipe Kendaraan</label>
+                    <input type="text" class="form-control" id="kend_type" name="kend_type" placeholder="Tipe Kendaraan" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tahun Pembuatan</label>
+                    <input type="text" class="form-control" id="kend_tahun" name="kend_tahun" placeholder="Tahun Pembuatan" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nomor Polisi</label>
+                    <input type="text" class="form-control" id="kend_no_polisi" name="kend_no_polisi" placeholder="Nomor Polisi" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nomor Rangka</label>
+                    <input type="text" class="form-control" id="kend_no_rangka" name="kend_no_rangka" placeholder="Nomor Rangka" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nomor Mesin</label>
+                    <input type="text" class="form-control" id="kend_no_mesin" name="kend_no_mesin" placeholder="Nomor Mesin" readonly />
+                </div>
+            </form>
+            
+            <button type="button" class="btn btn-lg btn-success btn-block bt-icon hidden" id="btn-polis-next">NEXT <span class="glyphicon glyphicon-chevron-right"></span></button>
+            
+        </div>
+        
+        <div class="container">
+            <hr />
+            <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='main-page.html';">Main Page <span class="glyphicon glyphicon-home"></span></button>
+            <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="logout();">Sign Out <span class="glyphicon glyphicon-off"></span></button>
+        </div>
+        
+        <!-- Dialogs -->
+        <div class="modal fade" id="AppDialogs" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myDialogs" aria-hidden="true">
+        	<div class="modal-dialog">
+                <div class="modal-content">
+                	<div class="modal-header">
+                    	<h4 class="modal-title" id="myDialogs"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="alert" id="myDialogsText"></p>
+                    </div>
+                    <div class="modal-footer" id="myDialogsFoot">
+                    	<button type="button" class="btn btn-default" id="button-DialogYes"><span class="glyphicon glyphicon-ok"></span> Yes</button>
+                        <button type="button" class="btn btn-default" id="button-DialogNo"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="button" class="btn btn-default" id="button-DialogClose"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- "Please Wait" Dialog -->
+        <div class="modal fade" id="pleasewait" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myWaitingModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    	<h4 class="modal-title" id="myWaitingModal">Please wait...</h4>
+                    	<div class="progress progress-striped active">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="cordova.js" type="text/javascript"></script>
+        <script src="barcodescanner.js" type="text/javascript"></script>
+        
+		<script src="includes/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="includes/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        
+        <script src="includes/js/func-closeApp.js"></script>
+        <script src="includes/js/func-logout.js"></script>
+        <script src="includes/js/func-session.js"></script>
+        
+        <script src="includes/js/func-barcode.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+        
+    </body>
+    
+</html>

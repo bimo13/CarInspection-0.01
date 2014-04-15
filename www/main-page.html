@@ -6,13 +6,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title>Car Inspection Sign-In</title>
+        <title>Car Inspection</title>
         
         <!-- Bootstrap core CSS -->
     	<link href="includes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         
-        <!-- Custom styles for index.html -->
-    	<link href="includes/css/index.css" rel="stylesheet">
+        <!-- Custom styles for main-page.html -->
+    	<link href="includes/css/main.css" rel="stylesheet">
+        <link href="includes/css/main-page.css" rel="stylesheet">
         <link href="includes/css/dialogs.css" rel="stylesheet">
         
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,29 +26,23 @@
     
     <body>
     	
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Total IT - Car Inspection</a>
+                </div>
+            </div>
+        </nav>
+        
         <div class="container">
-            
-            <form class="form-signin" role="form" id="form-signin" autocomplete="off">
-            	
-				<h3 class="form-signin-heading text-center"><img src="images/login-page-logo.gif" /></h3>
-                
-                <div class="form-group">
-                    <input name="username" id="username" type="text" class="form-control" placeholder="Username" required autofocus>
-                </div>
-                
-                <div class="form-group">
-                	<input name="password" id="password" type="password" class="form-control" placeholder="Password" required>
-                </div>
-                
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                
-                <p class="messages">
-                	<span class="text-messages"></span>
-                </p>
-                
-            </form>
-            
-        </div> <!-- /container -->
+        	<div class="link-button">
+                <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="window.location.href='form-inspeksi.html';">Form Inspeksi <span class="glyphicon glyphicon-list-alt"></span></button>
+                <button type="button" class="btn btn-default btn-lg btn-block bt-icon" onClick="logout();">Sign Out <span class="glyphicon glyphicon-off"></span></button>
+            </div>
+            <p class="messages err_body_bg">
+                <span class="text-messages err_body_text"></span>
+            </p>
+        </div>
         
         <!-- Dialogs -->
         <div class="modal fade" id="AppDialogs" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myDialogs" aria-hidden="true">
@@ -84,85 +79,12 @@
         
         <script src="cordova.js" type="text/javascript"></script>
         <script src="includes/js/jquery-1.11.0.min.js" type="text/javascript"></script>
-        <script src="includes/js/jquery.validate.min.js" type="text/javascript"></script>
         <script src="includes/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         
         <script src="includes/js/func-closeApp.js"></script>
-        
-        <script>
-        	
-			$('#form-signin').validate({
-				rules: {
-					username: {
-						required: true
-					},
-					password: {
-						required: true
-					}
-				},
-				highlight: function(element) {
-					$(element).closest('.form-group').addClass('has-error');
-				},
-				unhighlight: function(element) {
-					$(element).closest('.form-group').removeClass('has-error');
-				},
-				errorElement: 'span',
-				errorClass: 'help-block',
-				errorPlacement: function(error, element) {
-					if(element.parent('.input-group').length) {
-						error.insertAfter(element.parent());
-					} else {
-						error.insertAfter(element);
-					}
-				},
-				submitHandler: function(form){
-					submitLogin();
-				}
-			});
-			
-        </script>
-        
-        <script>
-			
-			function submitLogin(){
-				$("#pleasewait").modal();
-				
-				var log_username	=	$("#username").val();
-				var log_password	=	$("#password").val();
-				
-				$.post(
-					// URL
-					//
-					"http://carsurvey.totalit.co.id/web-service/main-login.php",
-					// Data POST
-					//
-					{
-						username: log_username,
-						password: log_password
-					},
-					// When Succeeded
-					//
-					function(data){
-						if(data['status'] != 1){
-							$("#pleasewait").modal('hide');
-							
-							$(".messages").addClass('bg-danger');
-							$(".text-messages").empty();
-							$(".text-messages").addClass('text-danger');
-							$(".text-messages").append(data['message']);
-						}else{
-							setTimeout(function(){
-								$("#pleasewait").modal('hide');
-								window.location.href	=	"main-page.html";
-							}, 1000);
-						}
-					},
-					"json"
-				);
-			}
-			
-        </script>
+        <script src="includes/js/func-logout.js"></script>
+        <script src="includes/js/func-session.js"></script>
         
     </body>
-
+    
 </html>
